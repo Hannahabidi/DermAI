@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>DermAI - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .navbar {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 16px 32px;
+        }
+        .navbar-brand {
+            color: #00d4aa !important;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .nav-user {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+        .main {
+            padding: 60px 32px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .welcome h2 {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        .welcome p {
+            color: rgba(255,255,255,0.5);
+            font-size: 16px;
+            margin-top: 8px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 36px 24px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card i {
+            font-size: 44px;
+            margin-bottom: 16px;
+        }
+        .card h3 {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .card p {
+            color: rgba(255,255,255,0.45);
+            font-size: 13px;
+        }
+        .card-analyse i { color: #00d4aa; }
+        .card-patients i { color: #0099ff; }
+        .card-logout i { color: #ff6b6b; }
+        .card-logout { border-color: rgba(255,107,107,0.2); }
+        .card-logout:hover { border-color: rgba(255,107,107,0.5); }
+    </style>
+</head>
+<body>
+    <nav class="navbar d-flex justify-content-between align-items-center">
+        <span class="navbar-brand"><i class="fas fa-microscope me-2"></i>DermAI</span>
+        <span class="nav-user"><i class="fas fa-user-circle me-1"></i>{{ session['user'] }}</span>
+    </nav>
+    <div class="main">
+        <div class="welcome">
+            <h2>Bienvenue sur DermAI 👋</h2>
+            <p>Plateforme de détection intelligente du cancer de peau par IA</p>
+        </div>
+        <div class="cards">
+            <a href="/predict" class="card card-analyse">
+                <i class="fas fa-search-plus"></i>
+                <h3>Nouvelle Analyse</h3>
+                <p>Analyser une lésion cutanée par IA</p>
+            </a>
+            <a href="/patients" class="card card-patients">
+                <i class="fas fa-users"></i>
+                <h3>Patients</h3>
+                <p>Consulter l'historique des analyses</p>
+            </a>
+            <a href="/logout" class="card card-logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <h3>Logout</h3>
+                <p>Se déconnecter de la plateforme</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

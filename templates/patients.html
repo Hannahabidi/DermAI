@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>DermAI - Patients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .navbar {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 16px 32px;
+        }
+        .navbar-brand {
+            color: #00d4aa !important;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .main {
+            padding: 40px 32px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .page-title {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            color: rgba(255,255,255,0.45);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .table-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background: rgba(0,212,170,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        thead th {
+            color: #00d4aa;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+        }
+        tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.2s;
+        }
+        tbody tr:hover { background: rgba(255,255,255,0.04); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody td {
+            padding: 16px 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        .patient-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .badge-malignant {
+            background: rgba(255,107,107,0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255,107,107,0.3);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-benign {
+            background: rgba(0,212,170,0.15);
+            color: #00d4aa;
+            border: 1px solid rgba(0,212,170,0.3);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .prob-mini {
+            background: rgba(255,255,255,0.08);
+            border-radius: 50px;
+            height: 6px;
+            width: 80px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        .prob-mini-fill {
+            height: 100%;
+            border-radius: 50px;
+        }
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+        .btn-back:hover { color: white; border-color: rgba(255,255,255,0.5); }
+        .empty {
+            text-align: center;
+            padding: 60px;
+            color: rgba(255,255,255,0.3);
+        }
+        .empty i { font-size: 48px; margin-bottom: 16px; display: block; }
+    </style>
+</head>
+<body>
+    <nav class="navbar d-flex justify-content-between align-items-center">
+        <span class="navbar-brand"><i class="fas fa-microscope me-2"></i>DermAI</span>
+    </nav>
+    <div class="main">
+        <a href="/dashboard" class="btn-back"><i class="fas fa-arrow-left me-2"></i>Retour</a>
+        <p class="page-title"><i class="fas fa-users me-2" style="color:#00d4aa"></i>Historique Patients</p>
+        <p class="page-subtitle">Liste de tous les patients analysés par DermAI</p>
+        <div class="table-card">
+            {% if patients %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Âge</th>
+                        <th>Résultat</th>
+                        <th>Probabilité</th>
+                        <th>Image</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in patients %}
+                    <tr>
+                        <td style="color:rgba(255,255,255,0.3)">{{ p.id }}</td>
+                        <td style="font-weight:600; color:white">{{ p.name }}</td>
+                        <td>{{ p.age }} ans</td>
+                        <td>
+                            {% if p.result == "Malignant" %}
+                            <span class="badge-malignant"><i class="fas fa-exclamation-triangle me-1"></i>Malignant</span>
+                            {% else %}
+                            <span class="badge-benign"><i class="fas fa-check me-1"></i>Bénin</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ (p.probability * 100) | round(2) }}%
+                            <span class="prob-mini">
+                                <div class="prob-mini-fill {% if p.result == 'Malignant' %}prob-malignant{% else %}prob-benign{% endif %}"
+                                     style="width:{{ (p.probability * 100) | round }}%; background: {% if p.result == 'Malignant' %}#ff6b6b{% else %}#00d4aa{% endif %}"></div>
+                            </span>
+                        </td>
+                        <td><img src="{{ p.image_path }}" class="patient-img" alt="lésion"></td>
+                        <td style="color:rgba(255,255,255,0.4); font-size:12px">{{ p.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty">
+                <i class="fas fa-user-slash"></i>
+                <p>Aucun patient analysé pour le moment</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
