@@ -38,6 +38,6 @@ Application Web complète en Python (Flask) intégrant un modèle d'Intelligence
 ![Patients](patients.png.png)
 ## 👩‍💻 Auteur
 
-**Hana El Abidi** - ENSTAB 2025/2026  
+**Hana El Abidi** - ENSTAB 2025/2026 | 1TA1 
 Module : Introduction à l'IA  
 Enseignante : Amira Echtioui
