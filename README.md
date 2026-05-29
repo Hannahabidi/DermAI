@@ -31,21 +31,11 @@ Application Web complète en Python (Flask) intégrant un modèle d'Intelligence
 
 ## 📸 Captures d'écran
 
-### Page Login
-![Login](screenshots/login.png)
-
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
-
-### Analyse Patient
-![Analyse](screenshots/predict.png)
-
-### Résultat
-![Résultat](screenshots/result.png)
-
-### Historique Patients
-![Patients](screenshots/patients.png)
-
+![Login](login.png.png)
+![Dashboard](dashboard.png.png)
+![Analyse](predict.png.png)
+![Résultat](result.png.png)
+![Patients](patients.png.png)
 ## 👩‍💻 Auteur
 
 **Hana El Abidi** - ENSTAB 2025/2026  
